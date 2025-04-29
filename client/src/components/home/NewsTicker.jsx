@@ -1,6 +1,5 @@
-import { Button } from "@material-tailwind/react";
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NewsTicker = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -16,25 +15,31 @@ const NewsTicker = () => {
   const formatTime = (date) => date.toLocaleTimeString("en-GB");
 
   return (
-    <div className="bg-[#ffffe8] w-full py-3 px-4 shadow-sm border border-red-100">
+    <div className="bg-white border border-gray-200 shadow-sm w-full px-4 py-3">
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         {/* News Section */}
         <div className="flex items-center w-full md:flex-1">
-          <span className="bg-red-500 text-white px-3 py-1 rounded font-medium text-sm shrink-0">
+          <span className="bg-indigo-600 text-white text-sm font-semibold px-3 py-1 rounded-md shrink-0">
             News
           </span>
-          <marquee className="ml-3 text-red-600 text-sm md:text-base font-medium">
-            Thakarpara High School - It is a NON-GOVERNMENT School. This institute's EIIN number is 126088. This institute is located in THAKARPARA, PANCHAGARH, RANGPUR division. It's geographical area is PLAIN LAND. It offers classes up to Secondary level.
+          <marquee className="ml-4 text-gray-700 text-sm md:text-base font-medium">
+          Thakarpara High School is located in Thakarpara, Panchagarh, in the Rangpur division of Bangladesh. The school operates in a plain land region and offers education up to the Secondary level. With an EIIN (Educational Institute Identification Number) of 126088, it serves as an important educational center in the local community.                                                  Thakarpara High School is dedicated to providing quality education and fostering a supportive learning environment for students. The school is well-regarded in the area for its commitment to academic excellence and extracurricular activities that promote the overall development of students.
           </marquee>
         </div>
 
         {/* Date & Time Section */}
-        <div className="flex items-center gap-2 text-white text-sm shrink-0">
-         <Link to="/celender">
-          <span className="bg-red-500 px-3 py-1 rounded">Calendar</span>
-         </Link>
-          <span className="bg-red-500 px-3 py-1 rounded">{formatDate(currentTime)}</span>
-          <span className="bg-red-500 px-3 py-1 rounded">{formatTime(currentTime)}</span>
+        <div className="flex items-center gap-2 text-sm font-medium">
+          <Link to="/celender">
+            <span className="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700 transition">
+              Calendar
+            </span>
+          </Link>
+          <span className="bg-gray-800 text-white px-3 py-1 rounded-md">
+            {formatDate(currentTime)}
+          </span>
+          <span className="bg-gray-800 text-white px-3 py-1 rounded-md">
+            {formatTime(currentTime)}
+          </span>
         </div>
       </div>
     </div>

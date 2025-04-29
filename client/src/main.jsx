@@ -8,6 +8,13 @@ import Layout from "./layout/layout";
 import Home from "./components/home/Home";
 import About from "./components/pages/About";
 import CalendarPage from "./components/pages/CalendarPage";
+import Signin from "./components/Auth/Signin";
+import Signup from "./components/Auth/Signup";
+import Admission from "./components/pages/Admission";
+import Teachers from "./components/home/Teachers";
+import EventDetail from "./components/home/event/EventDetail";
+import Result from "./components/pages/Result";
+import Contact from "./components/pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -27,8 +34,34 @@ const router = createBrowserRouter([
         path: '/celender',
         element: <CalendarPage />
       },
-    
-      
+      {
+        path: "/event/:id",
+        element: <EventDetail />
+      },
+      {
+        path: '/result',
+        element: <Result />
+      },
+      {
+        path: '/contact',
+        element: <Contact />
+      },
+      {
+        path: '/signin',
+        element: <Signin />
+      },
+      {
+        path: '/signup',
+        element: <Signup />
+      },
+      {
+        path: '/admission',
+        element: <Admission />
+      },
+      {
+        path: '/teachers',
+        element: <Teachers />
+      },
     ]
   },
 ]);
