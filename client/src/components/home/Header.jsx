@@ -35,9 +35,9 @@ const Header = () => {
                 >
                     Online Admission 2025
                 </button>
-                <Link to="/signin">
+                <Link to="/welcome">
                     <button className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition duration-200">
-                        Sign In
+                        Login
                     </button>
                 </Link>
             </div>

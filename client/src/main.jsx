@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { createBrowserRouter,RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorPage from "./components/pages/ErrorPage";
@@ -15,16 +15,17 @@ import Teachers from "./components/home/Teachers";
 import EventDetail from "./components/home/event/EventDetail";
 import Result from "./components/pages/Result";
 import Contact from "./components/pages/Contact";
+import WelcomePage from "./components/pages/WelcomePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <ErrorPage /> ,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
-        element: <Home/>
+        element: <Home />
       },
       {
         path: '/about',
@@ -47,7 +48,11 @@ const router = createBrowserRouter([
         element: <Contact />
       },
       {
-        path: '/signin',
+        path: '/welcome',
+        element: <WelcomePage />
+      },
+      {
+        path: '/login',
         element: <Signin />
       },
       {
@@ -62,6 +67,7 @@ const router = createBrowserRouter([
         path: '/teachers',
         element: <Teachers />
       },
+
     ]
   },
 ]);
