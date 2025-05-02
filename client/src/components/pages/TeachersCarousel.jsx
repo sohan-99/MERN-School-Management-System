@@ -10,7 +10,7 @@ function SampleNextArrow(props) {
   const { onClick } = props;
   return (
     <button
-      className="absolute top-2/4 right-4 transform -translate-y-2/4 bg-gray-800 text-white p-2 rounded-full z-10"
+      className="absolute top-2/4 right-4 transform -translate-y-2/4 bg-blue-600 text-white p-2 rounded-full z-10 shadow-lg hover:bg-blue-700"
       onClick={onClick}
     >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6">
@@ -28,7 +28,7 @@ function SamplePrevArrow(props) {
   const { onClick } = props;
   return (
     <button
-      className="absolute top-2/4 left-4 transform -translate-y-2/4 bg-gray-800 text-white p-2 rounded-full z-10"
+      className="absolute top-2/4 left-4 transform -translate-y-2/4 bg-blue-600 text-white p-2 rounded-full z-10 shadow-lg hover:bg-blue-700"
       onClick={onClick}
     >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6">
@@ -49,7 +49,7 @@ const TeachersCarousel = () => {
   const cardData = [
     {
       name: 'Akram Ali',
-      position: 'Principle',
+      position: 'Principal',
       imgSrc: 'https://i.imghippo.com/files/Jon9705GU.jpg',
       contactNumber: '+8801715614615',
       address: 'Jalashi, Panchagarh Sadar Panchagarh',
@@ -73,7 +73,7 @@ const TeachersCarousel = () => {
       position: 'Asst. Teacher : Science',
       imgSrc: 'https://i.imghippo.com/files/x92IE1723629147.jpg',
       contactNumber: '+8801724523949',
-      address: 'Marupara, Thekarpara,Panchagarh Sadar Panchagarh',
+      address: 'Marupara, Thekarpara, Panchagarh Sadar Panchagarh',
     },
     {
       name: 'Md. Nobibar Rahman',
@@ -126,14 +126,14 @@ const TeachersCarousel = () => {
     rows: 1,
     responsive: [
       {
-        breakpoint: 1024, // For tablets
+        breakpoint: 1024,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
         },
       },
       {
-        breakpoint: 640, // For mobile devices
+        breakpoint: 640,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -143,44 +143,43 @@ const TeachersCarousel = () => {
   };
 
   return (
-    <div className="relative mb-8">
-      <Slider {...settings} className="relative">
+    <div className="relative mb-12 px-4 md:px-8">
+      <Slider {...settings}>
         {cardData.map((card, index) => (
           <div key={index} className="px-2">
             <Card
-              className="w-96 mx-auto my-4 p-6 bg-gray-200 cursor-pointer"
+              className="w-80 mx-auto my-6 p-4 bg-white shadow-xl hover:shadow-blue-200 cursor-pointer transition duration-300"
               onClick={() => openModal(card)}
             >
-              <CardHeader floated={false} className="flex justify-center items-center h-40 bg-gray-300">
+              <CardHeader floated={false} className="flex justify-center items-center bg-blue-100 h-44">
                 <img
                   src={card.imgSrc}
                   alt="profile"
-                  className="w-36 h-36 rounded-full object-cover"
-                  style={{ width: '150px', height: '150px' }}
+                  className="w-36 h-36 rounded-full object-cover border-4 border-blue-500"
                 />
               </CardHeader>
               <CardBody className="text-center">
-                <Typography variant="h4" color="blue-gray" className="mb-2">
+                <Typography variant="h5" color="blue-gray" className="mb-2 font-semibold">
                   {card.name}
                 </Typography>
-                <Typography color="blue-gray" className="font-medium" textGradient>
+                <Typography color="blue" className="font-medium">
                   {card.position}
                 </Typography>
               </CardBody>
-              <CardFooter className="flex justify-center gap-7 pt-2">
-                <Tooltip content="Like">
+              <CardFooter className="flex justify-center gap-6 pt-2">
+                <Tooltip content="Facebook">
                   <Typography as="a" href="#facebook" variant="lead" color="blue" textGradient>
-                    <i className="fab fa-facebook" />
+                    <i className="fab fa-facebook-f text-xl" />
                   </Typography>
                 </Tooltip>
-                <Tooltip content="Follow">
+                <Tooltip content="Twitter">
                   <Typography as="a" href="#twitter" variant="lead" color="light-blue" textGradient>
-                    <i className="fab fa-twitter" />
+                    <i className="fab fa-twitter text-xl" />
                   </Typography>
                 </Tooltip>
-                <Tooltip content="Follow">
+                <Tooltip content="Instagram">
                   <Typography as="a" href="#instagram" variant="lead" color="purple" textGradient>
-                    <i className="fab fa-instagram" />
+                    <i className="fab fa-instagram text-xl" />
                   </Typography>
                 </Tooltip>
               </CardFooter>
@@ -190,24 +189,22 @@ const TeachersCarousel = () => {
       </Slider>
 
       {/* Modal */}
-      {selectedTeacher && (
-        <Dialog open={modalOpen} handler={closeModal}>
-          <DialogHeader>{selectedTeacher.name}</DialogHeader>
-          <DialogBody divider>
-            <Typography variant="h6" color="blue-gray">
-              Contact Number: {selectedTeacher.contactNumber}
-            </Typography>
-            <Typography variant="h6" color="blue-gray">
-              Address: {selectedTeacher.address}
-            </Typography>
-          </DialogBody>
-          <DialogFooter>
-            <Button variant="text" color="red" onClick={closeModal} className="mr-1">
-              Close
-            </Button>
-          </DialogFooter>
-        </Dialog>
-      )}
+      <Dialog open={modalOpen} handler={closeModal}>
+        <DialogHeader>{selectedTeacher?.name}</DialogHeader>
+        <DialogBody divider>
+          <Typography variant="h6" color="blue-gray">
+            Contact Number: {selectedTeacher?.contactNumber}
+          </Typography>
+          <Typography variant="h6" color="blue-gray" className="mt-2">
+            Address: {selectedTeacher?.address}
+          </Typography>
+        </DialogBody>
+        <DialogFooter>
+          <Button variant="text" color="red" onClick={closeModal} className="mr-2">
+            Close
+          </Button>
+        </DialogFooter>
+      </Dialog>
     </div>
   );
 };

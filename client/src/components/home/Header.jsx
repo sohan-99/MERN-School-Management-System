@@ -14,7 +14,7 @@ const Header = () => {
                 <img
                     src={NotFoundImg}
                     alt="School Logo"
-                    className="h-14 w-14 md:h-16 md:w-16 rounded-lg object-cover"
+                    className="h-16 w-16 md:h-16 md:w-16 rounded-full object-cover"
                 />
                 <div className="text-center md:text-left">
                     <Link to="/" className="block">
