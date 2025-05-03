@@ -1,50 +1,28 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from 'react-slick';
-import PropTypes from 'prop-types';
-import { Card, CardHeader, CardBody, CardFooter, Typography, Tooltip, Button, Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
-import { useState } from 'react';
-
-// Custom Arrow Components
-function SampleNextArrow(props) {
-  const { onClick } = props;
-  return (
-    <button
-      className="absolute top-2/4 right-4 transform -translate-y-2/4 bg-blue-600 text-white p-2 rounded-full z-10 shadow-lg hover:bg-blue-700"
-      onClick={onClick}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-      </svg>
-    </button>
-  );
-}
-
-SampleNextArrow.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
-
-function SamplePrevArrow(props) {
-  const { onClick } = props;
-  return (
-    <button
-      className="absolute top-2/4 left-4 transform -translate-y-2/4 bg-blue-600 text-white p-2 rounded-full z-10 shadow-lg hover:bg-blue-700"
-      onClick={onClick}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-      </svg>
-    </button>
-  );
-}
-
-SamplePrevArrow.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
+import { useState } from "react";
+import {
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+  Button,
+  Typography,
+  Card,
+  CardBody
+} from "@material-tailwind/react";
 
 const TeachersCarousel = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
+
+  const openModal = (teacher) => {
+    setSelectedTeacher(teacher);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedTeacher(null);
+  };
 
   const cardData = [
     {
@@ -83,124 +61,117 @@ const TeachersCarousel = () => {
       address: 'Jalashi, Panchagarh Sadar Panchagarh',
     },
     {
-      name: 'Olivia Davis',
-      position: 'Asst. Teacher : Science',
-      imgSrc: 'https://docs.material-tailwind.com/img/team-6.jpg',
-      contactNumber: '678-901-2345',
-      address: '303 Cedar St, Sydney, Australia',
+      name: 'Sarah Khan',
+      position: 'Asst. Teacher : ICT',
+      imgSrc: 'https://randomuser.me/api/portraits/women/65.jpg',
+      contactNumber: '+8801912345678',
+      address: 'Dhaka, Bangladesh',
     },
     {
-      name: 'Natalie Paisley',
-      position: 'Asst. Teacher : Science',
-      imgSrc: 'https://docs.material-tailwind.com/img/team-1.jpg',
-      contactNumber: '789-012-3456',
-      address: '404 Birch St, Paris, France',
+      name: 'John Smith',
+      position: 'Asst. Teacher : History',
+      imgSrc: 'https://randomuser.me/api/portraits/men/75.jpg',
+      contactNumber: '+8801612345678',
+      address: 'Rangpur, Bangladesh',
     },
     {
-      name: 'John Doe',
-      position: 'Asst. Teacher : Science',
-      imgSrc: 'https://docs.material-tailwind.com/img/team-2.jpg',
-      contactNumber: '890-123-4567',
-      address: '505 Walnut St, Berlin, Germany',
+      name: 'Emily Watson',
+      position: 'Asst. Teacher : Biology',
+      imgSrc: 'https://randomuser.me/api/portraits/women/72.jpg',
+      contactNumber: '+8801555555555',
+      address: 'Sylhet, Bangladesh',
     },
+    {
+      name: 'Robert Paul',
+      position: 'Asst. Teacher : Chemistry',
+      imgSrc: 'https://randomuser.me/api/portraits/men/78.jpg',
+      contactNumber: '+8801444444444',
+      address: 'Chattogram, Bangladesh',
+    },
+    {
+      name: 'Nadia Hasan',
+      position: 'Asst. Teacher : Bangla',
+      imgSrc: 'https://randomuser.me/api/portraits/women/68.jpg',
+      contactNumber: '+8801322222222',
+      address: 'Barisal, Bangladesh',
+    }
   ];
 
-  const openModal = (teacher) => {
-    setSelectedTeacher(teacher);
-    setModalOpen(true);
-  };
+  const principal = cardData[0];
+  const restTeachers = cardData.slice(1);
 
-  const closeModal = () => {
-    setModalOpen(false);
-    setSelectedTeacher(null);
-  };
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    rows: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+  const rows = [];
+  for (let i = 0; i < restTeachers.length; i += 3) {
+    rows.push(restTeachers.slice(i, i + 3));
+  }
 
   return (
-    <div className="relative mb-12 px-4 md:px-8">
-      <Slider {...settings}>
-        {cardData.map((card, index) => (
-          <div key={index} className="px-2">
+    <div className="p-6">
+      {/* Principal on top center */}
+      <div className="flex justify-center mb-8">
+        <Card
+          className="w-72 text-center bg-white shadow-xl border border-gray-300 rounded-lg hover:shadow-2xl transition-shadow duration-300"
+          onClick={() => openModal(principal)}
+        >
+          <div className="flex justify-center mt-4">
+            <img
+              src={principal.imgSrc}
+              alt={principal.name}
+              className="w-32 h-32 rounded-full object-cover border-4 border-blue-700 shadow-md"
+            />
+          </div>
+          <CardBody>
+            <Typography variant="h6" className="uppercase font-bold text-gray-800">
+              {principal.name}
+            </Typography>
+            <Typography className="text-sm text-blue-900 font-semibold">
+              {principal.position}
+            </Typography>
+          </CardBody>
+        </Card>
+      </div>
+
+      {/* Render teacher rows with centered grid */}
+      <div className="flex justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 md:gap-24 lg:gap-24 gap-6 justify-center">
+          {restTeachers.map((teacher, index) => (
             <Card
-              className="w-80 mx-auto my-6 p-4 bg-white shadow-xl hover:shadow-blue-200 cursor-pointer transition duration-300"
-              onClick={() => openModal(card)}
+              key={index}
+              className="w-72 text-center bg-white shadow-xl border border-gray-300 rounded-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+              onClick={() => openModal(teacher)}
             >
-              <CardHeader floated={false} className="flex justify-center items-center bg-blue-100 h-44">
+              <div className="flex justify-center mt-4">
                 <img
-                  src={card.imgSrc}
-                  alt="profile"
-                  className="w-36 h-36 rounded-full object-cover border-4 border-blue-500"
+                  src={teacher.imgSrc}
+                  alt={teacher.name}
+                  className="w-32 h-32 rounded-full object-cover border-4 border-blue-700 shadow-md"
                 />
-              </CardHeader>
-              <CardBody className="text-center">
-                <Typography variant="h5" color="blue-gray" className="mb-2 font-semibold">
-                  {card.name}
+              </div>
+              <CardBody>
+                <Typography variant="h6" className="uppercase font-bold text-gray-800">
+                  {teacher.name}
                 </Typography>
-                <Typography color="blue" className="font-medium">
-                  {card.position}
+                <Typography className="text-sm text-blue-900 font-semibold">
+                  {teacher.position}
                 </Typography>
               </CardBody>
-              <CardFooter className="flex justify-center gap-6 pt-2">
-                <Tooltip content="Facebook">
-                  <Typography as="a" href="#facebook" variant="lead" color="blue" textGradient>
-                    <i className="fab fa-facebook-f text-xl" />
-                  </Typography>
-                </Tooltip>
-                <Tooltip content="Twitter">
-                  <Typography as="a" href="#twitter" variant="lead" color="light-blue" textGradient>
-                    <i className="fab fa-twitter text-xl" />
-                  </Typography>
-                </Tooltip>
-                <Tooltip content="Instagram">
-                  <Typography as="a" href="#instagram" variant="lead" color="purple" textGradient>
-                    <i className="fab fa-instagram text-xl" />
-                  </Typography>
-                </Tooltip>
-              </CardFooter>
             </Card>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </div>
+      </div>
 
-      {/* Modal */}
       <Dialog open={modalOpen} handler={closeModal}>
         <DialogHeader>{selectedTeacher?.name}</DialogHeader>
-        <DialogBody divider>
-          <Typography variant="h6" color="blue-gray">
-            Contact Number: {selectedTeacher?.contactNumber}
+        <DialogBody>
+          <Typography>
+            <strong>Contact:</strong> {selectedTeacher?.contactNumber}
           </Typography>
-          <Typography variant="h6" color="blue-gray" className="mt-2">
-            Address: {selectedTeacher?.address}
+          <Typography>
+            <strong>Address:</strong> {selectedTeacher?.address}
           </Typography>
         </DialogBody>
         <DialogFooter>
-          <Button variant="text" color="red" onClick={closeModal} className="mr-2">
+          <Button color="blue" onClick={closeModal}>
             Close
           </Button>
         </DialogFooter>
