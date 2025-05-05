@@ -1,29 +1,29 @@
 const Result = () => {
+  const openPopup = (url) => {
+    window.open(url, 'popupWindow', 'width=1000,height=700,scrollbars=yes');
+  };
+
   return (
     <div className="font-sans min-h-screen bg-white">
       {/* Result Links */}
       <div className="flex flex-col md:flex-row gap-4 p-6">
-        <a
-          href="http://www.educationboardresults.gov.bd/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1"
+        <div
+          onClick={() => openPopup('http://www.educationboardresults.gov.bd/')}
+          className="flex-1 cursor-pointer"
         >
           <div className="bg-gradient-to-r from-green-600 to-green-500 text-white px-4 py-6 text-lg font-semibold rounded-md text-center hover:from-green-700 hover:to-green-600 transition shadow-md">
             Board Result
           </div>
-        </a>
+        </div>
 
-        <a
-          href="https://eboardresults.com/en/ebr.app/home/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1"
+        <div
+          onClick={() => openPopup('https://eboardresults.com/en/ebr.app/home/')}
+          className="flex-1 cursor-pointer"
         >
           <div className="bg-gradient-to-r from-green-600 to-green-500 text-white px-4 py-6 text-lg font-semibold rounded-md text-center hover:from-green-700 hover:to-green-600 transition shadow-md">
             Institution Result
           </div>
-        </a>
+        </div>
       </div>
 
       <div className="px-6">

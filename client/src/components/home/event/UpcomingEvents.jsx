@@ -40,7 +40,7 @@ export const events = [
     date: '21 June, 2025',
     location: 'Panchagarh',
     title: 'International Yoga Day',
-    description: `Relax and rejuvenate with <a href="https://example.com/yoga-day" target="_blank" rel="noopener noreferrer">International Yoga Day</a> featuring guided sessions and wellness workshops.`,
+    description: `Relax with <a href="https://example.com/yoga-day" target="_blank" rel="noopener noreferrer">International Yoga Day</a> featuring guided sessions and wellness workshops.`,
   },
   {
     id: 6,
@@ -48,7 +48,7 @@ export const events = [
     date: '12 August, 2025',
     location: 'Panchagarh',
     title: 'Youth Engagement Camp',
-    description: `Empower the next generation at our <a href="https://example.com/youth-camp" target="_blank" rel="noopener noreferrer">Youth Engagement Camp</a> with leadership, service, and fun.`,
+    description: `Empower youth at our <a href="https://example.com/youth-camp" target="_blank" rel="noopener noreferrer">Youth Engagement Camp</a> with leadership, service, and fun.`,
   }
 ];
 
@@ -70,7 +70,7 @@ const EventCard = ({ event }) => (
           className="text-gray-700 mb-4"
           dangerouslySetInnerHTML={{ __html: event.description }}
         />
-        <span className="text-green-600 hover:text-green-800 font-medium">
+        <span className=" text-gradient-to-r dark:from-[#070e41] dark:to-[#263381] font-medium">
           Read More →
         </span>
       </div>

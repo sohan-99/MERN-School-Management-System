@@ -1,73 +1,45 @@
-import { Link } from 'react-router-dom';
-import { Typography } from "@material-tailwind/react";
-
-const SITEMAP = [
-  {
-    links: [
-      { text: "Home", href: "/" },
-      { text: "About Us", href: "/about" }
-    ],
-  },
-  {
-    links: [
-      { text: "Contact Us", href: "/contact" },
-      { text: "Teachers", href: "/teachers" }
-    ],
-  },
-  {
-    links: [
-      { text: "Admission", href: "/admission" },
-      { text: "Result", href: "/result" }
-    ],
-  },
-  {
-    links: [
-      { text: "Login", href: "/login" }
-    ],
-  },
-];
-
-const currentYear = new Date().getFullYear();
+// Footer.jsx
+import { FaFacebookF } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
 
 export default function Footer() {
-  return (
-    <footer className="w-full bg-gradient-to-r from-green-600 to-green-500 text-white">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-          {SITEMAP.map(({ links }, key) => (
-            <div key={key}>
-              <ul className="space-y-2">
-                {links.map((link, i) => (
-                  <Typography key={i} as="li" className="font-medium">
-                    <Link
-                      to={link.href}
-                      className="inline-block transition-transform hover:scale-105 hover:underline"
-                    >
-                      {link.text}
-                    </Link>
-                  </Typography>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+  const handleGmailClick = () => {
+    window.open(
+      'https://mail.google.com/mail/?view=cm&fs=1&to=thakarparahighschool.ac.bd@gmail.com',
+      'gmailPopup',
+      'width=700,height=600'
+    );
+  };
 
-        <div className="border-t border-white mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center text-sm">
-          <Typography className="mb-4 sm:mb-0">
-            &copy; {currentYear} <Link to="/" className="hover:underline">Thakarpara High School</Link>. All Rights Reserved.
-          </Typography>
-          <div className="flex gap-4">
-            <a href="https://www.facebook.com/Thekorparahighschool" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
-              <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
-                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-              </svg>
-            </a>
-            <a href="https://twitter.com/school" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
-              <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
-                <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 001.88-2.37 8.64 8.64 0 01-2.73 1.04 4.28 4.28 0 00-7.29 3.9 12.13 12.13 0 01-8.8-4.46 4.27 4.27 0 001.32 5.71A4.27 4.27 0 012 9.72v.05a4.28 4.28 0 003.43 4.2 4.28 4.28 0 01-1.93.07 4.28 4.28 0 003.99 2.97 8.6 8.6 0 01-5.32 1.83c-.34 0-.67-.02-1-.06a12.14 12.14 0 006.56 1.92c7.88 0 12.2-6.53 12.2-12.2l-.01-.56A8.71 8.71 0 0024 4.56a8.45 8.45 0 01-2.54.7z" />
-              </svg>
+  return (
+    <footer className=" bg-gradient-to-r dark:from-[#070e41] dark:to-[#263381] text-gray-300 px-4 py-10">
+      <div className="max-w-7xl mx-auto">
+        {/* Top navigation */}
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="flex space-x-6 text-sm">
+            <a href="about#" className="hover:text-white transition">About Us</a>
+            <a href="contact#" className="hover:text-white transition">Contact</a>
+            <a href="result#" className="hover:text-white transition">Result</a>
+            <a href="teachers#" className="hover:text-white transition">Teachers</a>
+          </div>
+
+          {/* Social icons */}
+          <div className="flex space-x-5 text-xl">
+            <button onClick={handleGmailClick} className="hover:text-white transition">
+              <MdEmail />
+            </button>
+            <a
+              href="https://www.facebook.com/Thekorparahighschool/"
+              className="hover:text-white transition"
+            >
+              <FaFacebookF />
             </a>
           </div>
+        </div>
+
+        {/* Bottom copyright */}
+        <div className="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-white">
+          © 2025 Thakarpara High School. All rights reserved.
         </div>
       </div>
     </footer>

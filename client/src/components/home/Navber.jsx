@@ -1,13 +1,23 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => setIsOpen(prev => !prev);
 
+  const navItems = [
+    { to: "/", label: "Home" },
+    { to: "/about", label: "About" },
+    { to: "/admission", label: "Admission" },
+    { to: "/result", label: "Result" },
+    { to: "/teachers", label: "Teachers" },
+    { to: "/contact", label: "Contact" },
+  ];
+
   return (
-    <nav className="bg-green-700 text-white p-4 shadow-md">
+    <nav className="bg-gradient-to-r dark:from-[#070e41] dark:to-[#263381] text-white p-4 shadow-md">
       <div className="flex items-center justify-between">
         <button
           className="md:hidden px-3 py-2 border border-white rounded"
@@ -31,12 +41,19 @@ const Navbar = () => {
           isOpen ? "block" : "hidden"
         }`}
       >
-        <li><Link to="/" className="block hover:underline">Home</Link></li>
-        <li><Link to="/about" className="block hover:underline">About</Link></li>
-        <li><Link to="/admission" className="block hover:underline">Admission</Link></li>
-        <li><Link to="/result" className="block hover:underline">Result</Link></li>
-        <li><Link to="/teachers" className="block hover:underline">Teachers</Link></li>
-        <li><Link to="/contact" className="block hover:underline">Contact</Link></li>
+        {navItems.map(({ to, label }) => (
+          <li key={to} className="group relative">
+            <Link
+              to={to}
+              className={`block px-2 py-1 uppercase font-semibold transition-all duration-300 ${
+                location.pathname === to ? "text-white" : "text-white/80"
+              }`}
+            >
+              {label}
+              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );
