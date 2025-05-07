@@ -10,13 +10,15 @@ const WisdomWords = () => {
   ];
 
   return (
-    <div className="m-5 font-sans">
-      <h2 className="bg-blue-900 text-white text-center p-4 text-xl font-bold">
+    <div className="mx-auto max-w-4xl px-6 py-8 font-sans">
+      <h2 className="bg-blue-900 text-white text-center py-5 text-2xl md:text-3xl font-extrabold rounded-md shadow-md">
         Today's Wisdom Words
       </h2>
-      <ol className="list-decimal pl-8 mt-4 space-y-3 text-lg" role="list">
+      <ol className="list-decimal pl-6 md:pl-10 mt-6 space-y-4 text-lg md:text-xl text-gray-800 leading-relaxed">
         {wisdomWords.map((word, index) => (
-          <li key={index}>{word}</li>
+          <li key={index} className="hover:text-blue-700 transition-colors duration-200">
+            {word}
+          </li>
         ))}
       </ol>
     </div>

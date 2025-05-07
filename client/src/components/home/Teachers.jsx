@@ -4,7 +4,11 @@ import TeachersCarousel from "../pages/TeachersCarousel";
 const Teachers = () => {
   return (
     <div>
-      <div className="text-3xl font-semibold mx-auto text-center m-6 ">Teachers List</div>
+      <div >
+        <h2 className="bg-blue-900 text-white text-center py-5 text-2xl md:text-3xl font-extrabold rounded-md shadow-md">
+          Teachers List
+        </h2>
+      </div>
       <TeachersCarousel />
     </div>
   );
