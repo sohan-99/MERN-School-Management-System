@@ -1,8 +1,9 @@
 import React from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
-
 const Contact = () => {
+  const mapSrc = import.meta.env.VITE_GOOGLE_MAP_SRC;
+
   return (
     <div className="bg-gradient-to-br from-[#0d1b2a] via-[#1b263b] to-[#000814] text-white px-6 py-14 shadow-2xl max-w mx-auto">
       <h2 className="text-4xl font-extrabold mb-12 text-center uppercase tracking-wider border-b-4 border-green-300 pb-4 w-fit mx-auto">
@@ -91,7 +92,7 @@ const Contact = () => {
       {/* Google Map */}
       <div className="overflow-hidden rounded-xl shadow-lg border border-green-300">
         <iframe
-          src="https://www.google.com/maps?q=26.386585,88.614521&t=k&z=16&output=embed"
+          src={mapSrc}
           width="100%"
           height="400"
           loading="lazy"
