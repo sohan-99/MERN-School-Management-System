@@ -1,20 +1,56 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const { signup } = useAuth();
+    const navigate = useNavigate();
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
-        // const email = form.email.value;
-        // const password = form.password.value;
+        const email = form.email.value;
+        const password = form.password.value;
 
-        // Example toast (replace this with your actual registration logic)
-        toast.success(`Welcome, ${name}! Registration successful.`);
+        // Basic validation
+        if (password.length < 6) {
+            toast.error("Password should be at least 6 characters");
+            return;
+        }
+
+        try {
+            setLoading(true);
+            await signup(email, password, name);
+            toast.success(`Welcome, ${name}! Registration successful.`);
+            // Navigate to home or dashboard after successful registration
+            navigate("/");
+        } catch (error) {
+            console.error("Registration error:", error);
+            // Handle different Firebase error codes
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                    toast.error("This email is already registered. Please use a different email or try signing in.");
+                    break;
+                case 'auth/invalid-email':
+                    toast.error("Please enter a valid email address.");
+                    break;
+                case 'auth/weak-password':
+                    toast.error("Password should be at least 6 characters.");
+                    break;
+                case 'auth/network-request-failed':
+                    toast.error("Network error. Please check your internet connection.");
+                    break;
+                default:
+                    toast.error("Registration failed. Please try again.");
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -71,9 +107,13 @@ const Signup = () => {
                     <div className="mb-4">
                         <button
                             type="submit"
-                            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+                            disabled={loading}
+                            className={`w-full py-2 px-4 rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${loading
+                                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                                    : "bg-blue-500 text-white hover:bg-blue-600"
+                                }`}
                         >
-                            SignUp
+                            {loading ? "Creating Account..." : "SignUp"}
                         </button>
                     </div>
                 </form>

@@ -16,6 +16,7 @@ import EventDetail from "./components/home/event/EventDetail";
 import Result from "./components/pages/Result";
 import Contact from "./components/pages/Contact";
 import WelcomePage from "./components/pages/WelcomePage";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
         element: <WelcomePage />
       },
       {
-        path: '/login',
+        path: '/signin',
         element: <Signin />
       },
       {
@@ -74,6 +75,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
