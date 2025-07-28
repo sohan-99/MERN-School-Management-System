@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import NotFoundImg from "../../assets/download.png";
 
 const Header = () => {
     const navigate = useNavigate();
+    const { currentUser } = useAuth();
 
     const handleClick = () => {
         navigate('/admission');
@@ -41,9 +43,14 @@ const Header = () => {
                     </div>
                 </div>
 
-                <Link to="/welcome">
+                <Link to={currentUser ? "/dashboard" : "/welcome"}>
                     <button className="group relative flex h-12 w-[120px] items-center justify-between border-2 dark:border-[#656fe2] border-[#394481] rounded-full bg-gradient-to-r dark:from-[#070e41] dark:to-[#263381] from-[#f7f8ff] to-[#ffffff] font-medium dark:text-neutral-200 text-black">
-                        <span className="pl-4">Login</span>
+                        <span className="pl-4">
+                            {currentUser
+                                ? (currentUser.displayName || currentUser.email?.split('@')[0] || 'User')
+                                : 'Login'
+                            }
+                        </span>
                         <div className="relative h-9 w-9 overflow-hidden dark:bg-white bg-black rounded-full mr-1">
                             <div className="absolute top-[0.7em] left-[-0.1em] grid place-content-center transition-all w-full h-full duration-200 group-hover:-translate-y-5 group-hover:translate-x-4">
                                 <svg

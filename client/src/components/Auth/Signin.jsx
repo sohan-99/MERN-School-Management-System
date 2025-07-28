@@ -23,7 +23,7 @@ const Signin = () => {
             setLoading(true);
             await login(email, password);
             toast.success("Login successful!");
-            navigate("/");
+            navigate("/dashboard");
         } catch (error) {
             console.error("Login error:", error);
             switch (error.code) {
@@ -56,7 +56,7 @@ const Signin = () => {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
             toast.success(`Welcome, ${result.user.displayName}!`);
-            navigate("/");
+            navigate("/dashboard");
         } catch (error) {
             console.error("Google sign-in error:", error);
             switch (error.code) {
@@ -117,8 +117,8 @@ const Signin = () => {
                             type="submit"
                             disabled={loading}
                             className={`w-full py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-blue-300 ${loading
-                                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                                    : "bg-blue-500 text-white hover:bg-blue-600"
+                                ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                                : "bg-blue-500 text-white hover:bg-blue-600"
                                 }`}
                         >
                             {loading ? "Signing in..." : "Signin"}
@@ -136,8 +136,8 @@ const Signin = () => {
                         onClick={handleGoogleSignIn}
                         disabled={googleLoading}
                         className={`w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300 ${googleLoading
-                                ? "bg-gray-100 text-gray-500 cursor-not-allowed"
-                                : "text-gray-700 hover:bg-blue-600 hover:text-white"
+                            ? "bg-gray-100 text-gray-500 cursor-not-allowed"
+                            : "text-gray-700 hover:bg-blue-600 hover:text-white"
                             }`}
                     >
                         {googleLoading ? "Signing in with Google..." : "Sign in with Google"}

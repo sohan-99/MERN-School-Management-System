@@ -16,6 +16,8 @@ import EventDetail from "./components/home/event/EventDetail";
 import Result from "./components/pages/Result";
 import Contact from "./components/pages/Contact";
 import WelcomePage from "./components/pages/WelcomePage";
+import Dashboard from "./components/pages/Dashboard";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 
 const router = createBrowserRouter([
@@ -51,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: '/welcome',
         element: <WelcomePage />
+      },
+      {
+        path: '/dashboard',
+        element: <ProtectedRoute><Dashboard /></ProtectedRoute>
       },
       {
         path: '/signin',

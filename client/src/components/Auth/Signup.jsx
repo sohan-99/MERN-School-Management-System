@@ -27,8 +27,8 @@ const Signup = () => {
             setLoading(true);
             await signup(email, password, name);
             toast.success(`Welcome, ${name}! Registration successful.`);
-            // Navigate to home or dashboard after successful registration
-            navigate("/");
+            // Navigate to dashboard after successful registration
+            navigate("/dashboard");
         } catch (error) {
             console.error("Registration error:", error);
             // Handle different Firebase error codes
@@ -109,8 +109,8 @@ const Signup = () => {
                             type="submit"
                             disabled={loading}
                             className={`w-full py-2 px-4 rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${loading
-                                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                                    : "bg-blue-500 text-white hover:bg-blue-600"
+                                ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                                : "bg-blue-500 text-white hover:bg-blue-600"
                                 }`}
                         >
                             {loading ? "Creating Account..." : "SignUp"}

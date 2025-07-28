@@ -1,6 +1,5 @@
-import signinImage from '../../assets/gotopage.svg'; 
+import signinImage from '../../assets/gotopage.svg';
 
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const WelcomePage = () => {
@@ -19,13 +18,13 @@ const WelcomePage = () => {
           Welcome to<br />School Management System
         </h1>
         <p className="text-gray-600 mb-6">
-        Thakarpara high school management, class organization, and add students and faculty.
+          Thakarpara high school management, class organization, and add students and faculty.
           Seamlessly track attendance, assess performance, and provide feedback.
           Access records, view marks, and communicate effortlessly.
         </p>
         <div className="space-x-4">
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/signin')}
             className="bg-purple-600 text-white px-6 py-2 rounded shadow-md"
           >
             Login
