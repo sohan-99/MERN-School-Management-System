@@ -159,7 +159,7 @@ const Signup = () => {
                             className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 transform ${loading
                                 ? "bg-gray-500 cursor-not-allowed opacity-50"
                                 : "bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 hover:scale-105 shadow-lg hover:shadow-xl"
-                            }`}
+                                }`}
                         >
                             {loading ? (
                                 <div className="flex items-center justify-center">
