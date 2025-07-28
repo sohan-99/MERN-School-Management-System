@@ -55,6 +55,10 @@ const router = createBrowserRouter([
         element: <WelcomePage />
       },
       {
+        path: '/guest',
+        element: <Home />
+      },
+      {
         path: '/dashboard',
         element: <ProtectedRoute><Dashboard /></ProtectedRoute>
       },

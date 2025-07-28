@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -11,7 +12,11 @@ import { auth } from "../firebase/config";
 const AuthContext = createContext();
 
 export function useAuth() {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 }
 
 export function AuthProvider({ children }) {
@@ -20,22 +25,44 @@ export function AuthProvider({ children }) {
 
   // Signup function
   async function signup(email, password, name) {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    // Update the user's display name
-    await updateProfile(userCredential.user, {
-      displayName: name
-    });
-    return userCredential;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      // Update the user's display name
+      if (name) {
+        await updateProfile(userCredential.user, {
+          displayName: name
+        });
+        // Update the current user state to include the display name
+        setCurrentUser({
+          ...userCredential.user,
+          displayName: name
+        });
+      }
+      return userCredential;
+    } catch (error) {
+      console.error("Signup error:", error);
+      throw error;
+    }
   }
 
   // Login function
-  function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password);
+  async function login(email, password) {
+    try {
+      return await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
+    }
   }
 
   // Logout function
-  function logout() {
-    return signOut(auth);
+  async function logout() {
+    try {
+      return await signOut(auth);
+    } catch (error) {
+      console.error("Logout error:", error);
+      throw error;
+    }
   }
 
   useEffect(() => {
@@ -51,7 +78,8 @@ export function AuthProvider({ children }) {
     currentUser,
     signup,
     login,
-    logout
+    logout,
+    loading
   };
 
   return (
